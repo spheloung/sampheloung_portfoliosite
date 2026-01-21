@@ -1,17 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
 
 export const BackgroundEffects: React.FC = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
+      mouseX.set(event.clientX);
+      mouseY.set(event.clientY);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  const maskImage = useMotionTemplate`radial-gradient(circle 800px at ${mouseX}px ${mouseY}px, black, transparent)`;
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" ref={containerRef}>
@@ -19,11 +24,11 @@ export const BackgroundEffects: React.FC = () => {
       <div className="absolute inset-0 bg-background" />
 
       {/* 2. Grid Pattern with Mouse Mask */}
-      <div 
+      <motion.div
         className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
         style={{
-          maskImage: `radial-gradient(circle 800px at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
-          WebkitMaskImage: `radial-gradient(circle 800px at ${mousePosition.x}px ${mousePosition.y}px, black, transparent)`,
+          maskImage,
+          WebkitMaskImage: maskImage,
         }}
       />
 
@@ -33,10 +38,10 @@ export const BackgroundEffects: React.FC = () => {
 
       {/* 4. Beam Texture / Light Field */}
       <div className="absolute inset-0 opacity-20"
-           style={{
-             backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 50%)',
-             backgroundSize: '100% 100%',
-           }}
+        style={{
+          backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 50%)',
+          backgroundSize: '100% 100%',
+        }}
       />
     </div>
   );
@@ -65,7 +70,7 @@ export const Particles: React.FC = () => {
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    
+
     const initParticles = () => {
       particles = [];
       const particleCount = 50; // Keep it disciplined and minimal
@@ -85,7 +90,7 @@ export const Particles: React.FC = () => {
       frame++;
       if (frame % frameSkip === 0) {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        
+
         particles.forEach((p) => {
           // Advance by frameSkip to preserve overall speed even when skipping draws
           p.x += p.vx * frameSkip;
