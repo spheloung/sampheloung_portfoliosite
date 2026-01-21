@@ -2,35 +2,60 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionTitle } from '../ui/Elements';
 
-const Career: React.FC = () => {
-  // Timeline configuration
-  // We extend the end date to 2026 to ensure there's space at the top
-  const startDate = new Date('2019-01-01').getTime();
-  const endDate = new Date('2026-06-01').getTime(); 
-  const totalTime = endDate - startDate;
+interface TimelineItem {
+  role: string;
+  company: string;
+  date: string; // YYYY-MM-DD
+  side: 'left' | 'right';
+}
 
-  const getPositionPercent = (dateStr: string | number) => {
-    const date = typeof dateStr === 'number' ? dateStr : new Date(dateStr).getTime();
-    return ((date - startDate) / totalTime) * 100;
+const timelineItems: TimelineItem[] = [
+  {
+    role: "Revenue Operations Specialist",
+    company: "ApprovalMax",
+    date: "2025-04-01",
+    side: "left",
+  },
+  {
+    role: "Technical Operations Specialist",
+    company: "First AML",
+    date: "2021-06-01",
+    side: "right",
+  },
+  {
+    role: "Senior AML Analyst",
+    company: "First AML",
+    date: "2020-01-01",
+    side: "left",
+  },
+];
+
+const Career: React.FC = () => {
+  // 1. Data Processing
+  // We want Today at 0% and the Oldest Date at 100%.
+  const today = new Date();
+  const dates = timelineItems.map(i => new Date(i.date));
+  const oldestDate = new Date(Math.min(...dates.map(d => d.getTime())));
+
+  // Total span of time from Today back to the oldest role
+  const rangeMs = today.getTime() - oldestDate.getTime();
+
+  const getPercentFromTop = (dateStr: string) => {
+    const itemDate = new Date(dateStr);
+    const delta = today.getTime() - itemDate.getTime();
+    // Calculate percentage, clamped between 0 and 100 just in case
+    const rawPercent = (delta / rangeMs) * 100;
+    return Math.max(0, Math.min(100, rawPercent));
   };
 
-  // Anchor "Next big thing" to today's date
-  // Using actual Date.now() as requested.
-  const todayPercent = getPositionPercent(Date.now());
-  
-  // Specific Job Positions
-  const job1Percent = getPositionPercent('2025-04-01');
-  const job2Percent = getPositionPercent('2021-06-01');
-  const job3Percent = getPositionPercent('2020-01-01');
-
   return (
-    <section id="career" className="py-24 relative">
+    <section id="career" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle title="Career History" subtitle="Experience" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          
-          {/* Left Column: Text Content (Compressed ~40%) */}
+
+          {/* Left Column: Summary Text */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -40,181 +65,119 @@ const Career: React.FC = () => {
               className="prose prose-invert prose-lg text-slate-400"
             >
               <p className="mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                My professional journey has been driven by a passion for operational excellence and strategic growth.
+                From analyzing complex AML data to optimizing revenue operations, I focus on building scalable systems
+                that drive efficiency.
               </p>
               <p className="mb-6">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                I thrive in dynamic environments where technical precision meets business strategy, ensuring that every
+                process implementation directly contributes to broader organizational goals.
               </p>
             </motion.div>
           </div>
 
-          {/* Right Column: Vertical Timeline */}
-          <div className="lg:col-span-7 relative h-[700px] block lg:pl-12">
-            
-            {/* Center Vertical Line */}
-            {/* Runs from bottom up to the arrow base (todayPercent) */}
-            <div 
-              className="absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-t from-white/5 via-white/20 to-white/40"
-              style={{ top: `${100 - todayPercent}%`, bottom: '0' }}
-            />
+          {/* Right Column: The Vertical Timeline */}
+          {/* We use a fixed height container for the timeline visual */}
+          <div className="lg:col-span-7 relative h-[700px] mt-8 lg:mt-0">
 
-            {/* "The Next Big Thing" Marker */}
-            {/* Anchored to Today's date */}
+            {/* FULL HEIGHT CENTER LINE */}
+            <div className="absolute left-1/2 top-[55px] bottom-0 w-px bg-gradient-to-b from-white/40 via-white/20 to-white/5 -translate-x-1/2" />
+
+            {/* ARROW (TODAY) - FIXED AT TOP (0%) */}
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center z-20 transform -translate-y-full"
-                style={{ bottom: `${todayPercent}%` }}
+              initial={{ opacity: 0, x: "-50%", y: -10 }}
+              whileInView={{ opacity: 1, x: "-50%", y: 0 }}
+              viewport={{ once: true }}
+              className="absolute left-1/2 top-0 flex flex-col items-center z-20"
             >
-                 <div className="text-accent text-lg md:text-xl font-bold tracking-wide whitespace-nowrap mb-2">
-                   The next big thing
-                 </div>
-                 {/* Solid Arrow Head pointing UP */}
-                 <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[16px] border-b-accent" />
+              <span className="text-accent text-lg font-bold mb-2 whitespace-nowrap">
+                The next big thing
+              </span>
+              <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[16px]
+                              border-l-transparent border-r-transparent border-b-accent" />
             </motion.div>
 
+            {/* TIMELINE ITEMS */}
+            {timelineItems.map((item, index) => {
+              const topPercent = getPercentFromTop(item.date);
 
-            {/* =========================================================
-                TIMELINE ITEM 1 (Top)
-                Left: Revenue Operations Specialist - ApprovalMax
-                Right: April 2025
-               ========================================================= */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="absolute w-full flex items-center justify-center"
-                style={{ bottom: `${job1Percent}%` }}
-            >
-                {/* Central Node */}
-                <div className="w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)] z-10" />
-                
-                {/* Content Container */}
-                <div className="absolute w-full flex justify-between items-center px-8 md:px-12">
-                    
-                    {/* LEFT CONTENT: Role */}
-                    <div className="flex-1 text-right pr-4 md:pr-0">
-                        <div className="group cursor-default">
-                             <h4 className="text-lg md:text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Revenue Operations Specialist</h4>
-                             <span className="text-sm text-slate-500 font-medium tracking-wide block mt-1">ApprovalMax</span>
-                        </div>
-                    </div>
+              return (
+                <motion.div
+                  key={item.date}
+                  initial={{ opacity: 0, scale: 0.9, x: "-50%" }}
+                  whileInView={{ opacity: 1, scale: 1, x: "-50%" }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15 }}
+                  // Master Container: Positioned at the specific % from top.
+                  // We use a flex row to align everything relative to the vertical center of the ROW.
+                  className="absolute left-1/2 w-full flex items-center justify-center pointer-events-none"
+                  style={{ top: `${topPercent}%` }}
+                >
 
-                    {/* Spacer */}
-                    <div className="w-8 md:w-12" />
+                  {/* LEFT SIDE CONTENT */}
+                  <div className="flex-1 flex justify-end items-center pr-8 relative">
+                    {/* If item is on the LEFT, show Role/Company here */}
+                    {item.side === "left" && (
+                      <div className="text-right pointer-events-auto">
+                        <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{item.role}</h4>
+                        <span className="text-sm text-slate-500 font-medium mt-1">{item.company}</span>
+                      </div>
+                    )}
+                    {/* If item is on the RIGHT, show Date here */}
+                    {item.side === "right" && (
+                      <div className="text-right pointer-events-auto">
+                        <span className="font-mono text-sm text-slate-500">
+                          {new Date(item.date).toLocaleDateString("en-GB", {
+                            month: "long",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                    )}
 
-                    {/* RIGHT CONTENT: Date */}
-                    <div className="flex-1 text-left pl-4 md:pl-0">
-                        <span className="font-mono text-sm text-slate-500">April 2025</span>
-                    </div>
-
-                    {/* Decorative Arrow Pointing LEFT (to Title) */}
-                    <motion.div 
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2, duration: 0.4 }}
-                        className="absolute top-1/2 -translate-y-1/2 h-px bg-white/20 w-8 md:w-12 right-1/2 mr-[2px] origin-right"
-                    />
-                </div>
-            </motion.div>
+                    {/* Left Connector Line */}
+                    {/* Touches the dot on the right side of this box */}
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20" />
+                  </div>
 
 
-            {/* =========================================================
-                TIMELINE ITEM 2 (Middle)
-                Left: June 2021
-                Right: Technical Operations Specialist - First AML
-               ========================================================= */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="absolute w-full flex items-center justify-center"
-                style={{ bottom: `${job2Percent}%` }}
-            >
-                {/* Central Node */}
-                <div className="w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)] z-10" />
-                
-                <div className="absolute w-full flex justify-between items-center px-8 md:px-12">
-                    
-                    {/* LEFT CONTENT: Date */}
-                    <div className="flex-1 text-right pr-4 md:pr-0">
-                        <span className="font-mono text-sm text-slate-500">June 2021</span>
-                    </div>
-
-                    {/* Spacer */}
-                    <div className="w-8 md:w-12" />
-
-                    {/* RIGHT CONTENT: Role */}
-                    <div className="flex-1 text-left pl-4 md:pl-0">
-                        <div className="group cursor-default">
-                             <h4 className="text-lg md:text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Technical Operations Specialist</h4>
-                             <span className="text-sm text-slate-500 font-medium tracking-wide block mt-1">First AML</span>
-                        </div>
-                    </div>
-
-                    {/* Decorative Arrow Pointing RIGHT (to Title) */}
-                    <motion.div 
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4, duration: 0.4 }}
-                        className="absolute top-1/2 -translate-y-1/2 h-px bg-white/20 w-8 md:w-12 left-1/2 ml-[2px] origin-left"
-                    />
-                </div>
-            </motion.div>
+                  {/* CENTER NODE DOT */}
+                  {/* Static flex item. 'shrink-0' ensures it stays 12x12px. */}
+                  {/* z-10 puts it above the vertical line. */}
+                  <div className="relative z-10 shrink-0">
+                    <div className="w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                  </div>
 
 
-            {/* =========================================================
-                TIMELINE ITEM 3 (Bottom)
-                Left: Senior AML Analyst
-                Right: January 2020
-               ========================================================= */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="absolute w-full flex items-center justify-center"
-                style={{ bottom: `${job3Percent}%` }}
-            >
-                {/* Central Node */}
-                <div className="w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)] z-10" />
-                
-                <div className="absolute w-full flex justify-between items-center px-8 md:px-12">
-                    
-                    {/* LEFT CONTENT: Role */}
-                    <div className="flex-1 text-right pr-4 md:pr-0">
-                        <div className="group cursor-default">
-                             <h4 className="text-lg md:text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">Senior AML Analyst</h4>
-                             <span className="text-sm text-slate-500 font-medium tracking-wide block mt-1">First AML</span>
-                        </div>
-                    </div>
+                  {/* RIGHT SIDE CONTENT */}
+                  <div className="flex-1 flex justify-start items-center pl-8 relative">
+                    {/* Right Connector Line */}
+                    {/* Touches the dot on the left side of this box */}
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20" />
 
-                    {/* Spacer */}
-                    <div className="w-8 md:w-12" />
+                    {/* If item is on the LEFT, show Date here */}
+                    {item.side === "left" && (
+                      <div className="text-left pointer-events-auto">
+                        <span className="font-mono text-sm text-slate-500">
+                          {new Date(item.date).toLocaleDateString("en-GB", {
+                            month: "long",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                    )}
+                    {/* If item is on the RIGHT, show Role/Company here */}
+                    {item.side === "right" && (
+                      <div className="text-left pointer-events-auto">
+                        <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{item.role}</h4>
+                        <span className="text-sm text-slate-500 font-medium mt-1">{item.company}</span>
+                      </div>
+                    )}
+                  </div>
 
-                    {/* RIGHT CONTENT: Date */}
-                    <div className="flex-1 text-left pl-4 md:pl-0">
-                        <span className="font-mono text-sm text-slate-500">January 2020</span>
-                    </div>
-
-                    {/* Decorative Arrow Pointing LEFT (to Title) */}
-                    <motion.div 
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.6, duration: 0.4 }}
-                        className="absolute top-1/2 -translate-y-1/2 h-px bg-white/20 w-8 md:w-12 right-1/2 mr-[2px] origin-right"
-                    />
-                </div>
-            </motion.div>
+                </motion.div>
+              );
+            })}
 
           </div>
         </div>
