@@ -1,45 +1,131 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { SectionTitle } from '../ui/Elements';
-import { Photo } from '../../types';
 
-const photos: Photo[] = [
-  { id: '1', url: '/images/photos/photo-1.svg', caption: 'Urban Solitude' },
-  { id: '2', url: '/images/photos/photo-2.svg', caption: 'Neon Nights' },
-  { id: '3', url: '/images/photos/photo-3.svg', caption: 'Geometric Shadows' },
-  { id: '4', url: '/images/photos/photo-4.svg', caption: 'Architecture' },
-  { id: '5', url: '/images/photos/photo-5.svg', caption: 'Motion' },
+interface LocationCard {
+  id: string;
+  name: string;
+  imageUrl?: string;
+}
+
+const locations: LocationCard[] = [
+  { id: '1', name: 'Antarctica' },
+  { id: '2', name: 'Tekapo' },
+  { id: '3', name: 'Canterbury' },
+  { id: '4', name: 'Coromandel' },
 ];
 
 const Photography: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollPosition = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    setCanScrollLeft(scrollLeft > 10);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    checkScrollPosition();
+    container.addEventListener('scroll', checkScrollPosition);
+    window.addEventListener('resize', checkScrollPosition);
+
+    return () => {
+      container.removeEventListener('scroll', checkScrollPosition);
+      window.removeEventListener('resize', checkScrollPosition);
+    };
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    const cardWidth = scrollRef.current.clientWidth / 3;
+    const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+    scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
   return (
     <section id="photography" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle title="Photography" subtitle="Perspective" />
-        
-        {/* Masonry-style abstract layout with parallax feel */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {photos.map((photo, index) => (
-            <motion.div
-              key={photo.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15, duration: 0.8 }}
-              className="relative group break-inside-avoid"
+
+        {/* Carousel Container with Arrows */}
+        <div className="relative group/carousel">
+
+          {/* Left Arrow */}
+          {canScrollLeft && (
+            <button
+              onClick={() => scroll('left')}
+              className="absolute left-0 top-0 bottom-4 z-20 w-12 
+                         bg-gradient-to-r from-black/80 to-transparent
+                         flex items-center justify-start pl-2
+                         opacity-0 group-hover/carousel:opacity-100 
+                         transition-opacity duration-300
+                         hover:from-black/90"
+              aria-label="Scroll left"
             >
-              <div className="overflow-hidden rounded-lg">
-                <img 
-                  src={photo.url} 
-                  alt={photo.caption} 
-                  className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <span className="text-white font-medium tracking-wide">{photo.caption}</span>
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Right Arrow */}
+          {canScrollRight && (
+            <button
+              onClick={() => scroll('right')}
+              className="absolute right-0 top-0 bottom-4 z-20 w-12 
+                         bg-gradient-to-l from-black/80 to-transparent
+                         flex items-center justify-end pr-2
+                         opacity-0 group-hover/carousel:opacity-100 
+                         transition-opacity duration-300
+                         hover:from-black/90"
+              aria-label="Scroll right"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Inner scrollable row */}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {locations.map((location, index) => (
+              <motion.div
+                key={location.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="shrink-0 w-full md:w-[calc(33.333%-1rem)] snap-start"
+              >
+                {/* Card */}
+                <div className="relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm h-80 flex flex-col">
+                  {/* Image placeholder area */}
+                  <div className="flex-1 bg-gradient-to-br from-slate-800/50 to-slate-900/80 flex items-center justify-center">
+                    <span className="text-slate-500 text-sm">Photo placeholder</span>
+                  </div>
+
+                  {/* Card footer */}
+                  <div className="p-6 border-t border-white/10">
+                    <h3 className="text-xl font-bold text-white">{location.name}</h3>
+                    <p className="text-slate-500 text-sm mt-1">Location</p>
+                  </div>
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
