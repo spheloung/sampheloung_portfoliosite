@@ -21,6 +21,7 @@ const Navbar: React.FC = () => {
     { name: 'Career', href: '/career' },
     { name: 'Projects', href: '/projects' },
     { name: 'Photography', href: '/photography' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -56,21 +57,6 @@ const Navbar: React.FC = () => {
               {link.name}
             </Link>
           ))}
-          {isHomePage ? (
-            <a
-              href="#contact"
-              className="text-base font-medium text-slate-400 hover:text-white transition-colors tracking-wide"
-            >
-              Contact
-            </a>
-          ) : (
-            <Link
-              to="/#contact"
-              className="text-base font-medium text-slate-400 hover:text-white transition-colors tracking-wide"
-            >
-              Contact
-            </Link>
-          )}
         </div>
 
         {/* Mobile Menu Overlay */}

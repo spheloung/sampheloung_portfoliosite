@@ -65,13 +65,12 @@ const Career: React.FC = () => {
               className="prose prose-invert prose-lg text-slate-400"
             >
               <p className="mb-6">
-                My professional journey has been driven by a passion for operational excellence and strategic growth.
-                From analyzing complex AML data to optimizing revenue operations, I focus on building scalable systems
-                that drive efficiency.
+                My professional journey has been driven by solving complex problems and delivering solutions that can be
+                quickly adopted by Go-To-Market teams to improve efficiency.
               </p>
               <p className="mb-6">
-                I thrive in dynamic environments where technical precision meets business strategy, ensuring that every
-                process implementation directly contributes to broader organizational goals.
+                I thrive in dynamic and fast paced environments where technical precision meets business strategy,
+                ensuring that every process implementation directly contributes to broader organisational goals.
               </p>
             </motion.div>
           </div>

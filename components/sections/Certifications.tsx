@@ -18,7 +18,7 @@ const Certifications: React.FC = () => {
             >
               {/* Subtle hover glow */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="flex flex-col items-center gap-2 opacity-30 group-hover:opacity-60 transition-opacity duration-500 z-10">
                 <Award size={28} strokeWidth={1.5} />
                 <span className="text-xs font-mono tracking-widest uppercase">Certification Badge</span>

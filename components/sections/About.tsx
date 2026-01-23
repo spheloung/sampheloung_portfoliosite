@@ -7,9 +7,9 @@ const About: React.FC = () => {
     <section id="about" className="pt-24 md:pt-32 pb-8 relative">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
-          
+
           {/* Left Column: Image Placeholder */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -18,7 +18,7 @@ const About: React.FC = () => {
           >
             {/* Abstract placeholder styling */}
             <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-blue-900/10 opacity-50" />
-            
+
             {/* Placeholder Text */}
             <h3 className="relative z-10 text-4xl md:text-5xl font-bold text-white/20 text-center leading-tight p-6 group-hover:text-white/30 transition-colors select-none">
               Image<br />Goes<br />Here
@@ -32,8 +32,8 @@ const About: React.FC = () => {
           {/* Right Column: Text Content */}
           <div className="flex flex-col">
             <SectionTitle title="About Me" subtitle="Introduction" />
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -41,18 +41,17 @@ const About: React.FC = () => {
               className="text-slate-300 leading-relaxed text-lg space-y-8"
             >
               <p>
-                Hi, I'm Sam Pheloung. I operate at the intersection of
+                Hi, I'm Sam. I operate at the intersection of
                 business strategy and technical execution. My passion
                 lies in untangling complex operational knots and
                 weaving them into streamlined, automated systems that
                 drive revenue.
               </p>
               <p>
-                With a background deeply rooted in RevOps, I don't just
-                fix problems—I architect solutions that scale. From CRM
-                architecture to full-cycle automation pipelines, my goal
-                is to let your team focus on selling while the systems
-                handle the rest.
+                Operating as a bridge between the Go-To-Market teams, engineering teams
+                and senior leadership, I translate business requirements into
+                robust systems that support revenue, compliance and
+                decision-making at scale.
               </p>
             </motion.div>
           </div>

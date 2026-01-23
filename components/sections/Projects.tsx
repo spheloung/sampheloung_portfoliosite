@@ -6,30 +6,30 @@ import { Project } from '../../types';
 const projects: Project[] = [
   {
     id: '1',
-    title: 'Automated Lead Routing Engine',
-    description: 'A Python-based engine using LeanData logic to distribute leads based on complex territory rules and capacity.',
-    tags: ['Python', 'Salesforce', 'API'],
+    title: 'Til - An automed billing engine',
+    description: 'A Python-based engine using Salesforce and App data to generate invoices in Xero.',
+    tags: ['Python', 'Salesforce', 'SQL'],
     image: '/images/projects/project-1.svg'
   },
   {
     id: '2',
-    title: 'Revenue Intelligence Dashboard',
-    description: 'Full-stack dashboard visualizing ARR, Churn, and Expansion revenue in real-time for executive leadership.',
-    tags: ['React', 'D3.js', 'Snowflake'],
+    title: 'VisaTracker Pro',
+    description: 'Full-stack web application to track the number of days left before a visa expires.',
+    tags: ['React', 'AntiGravity', 'SupaBase'],
     image: '/images/projects/project-2.svg'
   },
   {
     id: '3',
-    title: 'CPQ Implementation',
+    title: 'Portfolio Website',
     description: 'End-to-end implementation of Salesforce CPQ reducing quote generation time by 75%.',
-    tags: ['Salesforce CPQ', 'Process Design'],
+    tags: ['Next.js', 'Claude', 'Framer Motion'],
     image: '/images/projects/project-3.svg'
   },
   {
     id: '4',
-    title: 'Marketing Attribution Model',
-    description: 'Multi-touch attribution model built to track ROI across 15+ marketing channels.',
-    tags: ['SQL', 'Tableau', 'Marketo'],
+    title: 'The Rise of China',
+    description: 'A Masters in International Relations thesis on the rise of China.',
+    tags: ['Research', 'International Relations', 'Academic'],
     image: '/images/projects/project-4.svg'
   }
 ];
@@ -52,10 +52,10 @@ const Projects: React.FC = () => {
               <Card className="h-full flex flex-col p-0 overflow-hidden border-white/5">
                 <div className="relative h-64 overflow-hidden">
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" 
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
