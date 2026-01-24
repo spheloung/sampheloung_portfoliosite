@@ -28,6 +28,7 @@ export default {
                 'border-beam': 'border-beam 4s linear infinite',
                 'float': 'float 10s ease-in-out infinite',
                 'glitch': 'glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite',
+                'pulse-once': 'pulse-ring 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards',
             },
             keyframes: {
                 shimmer: {
@@ -49,6 +50,11 @@ export default {
                     '60%': { transform: 'translate(2px, 2px)' },
                     '80%': { transform: 'translate(2px, -2px)' },
                     '100%': { transform: 'translate(0)' }
+                },
+                'pulse-ring': {
+                    '0%': { transform: 'scale(0.8)', opacity: '0.8', boxShadow: '0 0 0 0 rgba(59, 130, 246, 0.7)' },
+                    '50%': { transform: 'scale(1.1)', opacity: '0.4', boxShadow: '0 0 0 10px rgba(59, 130, 246, 0)' },
+                    '100%': { transform: 'scale(1.1)', opacity: '0', boxShadow: '0 0 0 0 rgba(59, 130, 246, 0)' }
                 }
             }
         },

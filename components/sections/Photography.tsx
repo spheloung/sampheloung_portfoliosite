@@ -1,18 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { SectionTitle } from '../ui/Elements';
 
 interface LocationCard {
   id: string;
   name: string;
   imageUrl?: string;
+  href: string;
 }
 
 const locations: LocationCard[] = [
-  { id: '1', name: 'Antarctica' },
-  { id: '2', name: 'Tekapo' },
-  { id: '3', name: 'Canterbury' },
-  { id: '4', name: 'Coromandel' },
+  { id: '1', name: 'Antarctica', href: '/photography/antarctica' },
+  { id: '2', name: 'Tekapo', href: '/photography/tekapo' },
+  { id: '3', name: 'Canterbury', href: '/photography/canterbury' },
+  { id: '4', name: 'Coromandel', href: '/photography/coromandel' },
 ];
 
 const Photography: React.FC = () => {
@@ -107,22 +109,24 @@ const Photography: React.FC = () => {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="shrink-0 w-full md:w-[calc(33.333%-1rem)] snap-start"
               >
-                {/* Card */}
-                <div className="relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm h-80 flex flex-col">
-                  {/* Image placeholder area */}
-                  <div className="flex-1 bg-gradient-to-br from-slate-800/50 to-slate-900/80 flex items-center justify-center">
-                    <span className="text-slate-500 text-sm">Photo placeholder</span>
-                  </div>
+                <Link to={location.href} className="block group h-full">
+                  {/* Card */}
+                  <div className="relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm h-80 flex flex-col transition-all duration-300 hover:border-accent/20">
+                    {/* Image placeholder area */}
+                    <div className="flex-1 bg-gradient-to-br from-slate-800/50 to-slate-900/80 flex items-center justify-center">
+                      <span className="text-slate-500 text-sm">Photo placeholder</span>
+                    </div>
 
-                  {/* Card footer */}
-                  <div className="p-6 border-t border-white/10">
-                    <h3 className="text-xl font-bold text-white">{location.name}</h3>
-                    <p className="text-slate-500 text-sm mt-1">Location</p>
-                  </div>
+                    {/* Card footer */}
+                    <div className="p-6 border-t border-white/10">
+                      <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors">{location.name}</h3>
+                      <p className="text-slate-500 text-sm mt-1">Location</p>
+                    </div>
 
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                </div>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>

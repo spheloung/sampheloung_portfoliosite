@@ -22,7 +22,8 @@ const ContactPage: React.FC = () => {
                         className="text-center"
                     >
                         <p className="text-lg text-slate-300 mb-8">
-                            I'm always interested in hearing about new opportunities, innovative projects, or just chatting about technology. Feel free to reach out using the form below or via email.
+                            I'm always interested in hearing about new opportunities, innovative projects, or just chatting about technology.
+                            Feel free to reach out using the form below.
                         </p>
 
                         <div className="bg-white/5 border border-white/10 rounded-xl p-8 backdrop-blur-sm">
@@ -66,13 +67,6 @@ const ContactPage: React.FC = () => {
                                     Send Message
                                 </button>
                             </form>
-                        </div>
-
-                        <div className="mt-12">
-                            <p className="text-slate-400">Prefer email?</p>
-                            <a href="mailto:sam@example.com" className="text-accent hover:underline text-lg font-medium">
-                                sam@example.com
-                            </a>
                         </div>
                     </motion.div>
                 </div>

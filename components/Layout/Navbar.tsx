@@ -49,10 +49,10 @@ const Navbar: React.FC = () => {
             <Link
               key={link.name}
               to={link.href}
-              className={`text-base font-medium transition-colors tracking-wide ${location.pathname === link.href || location.pathname.startsWith(link.href + '/')
+              className={`relative text-base font-medium transition-colors tracking-wide px-2 py-1 ${location.pathname === link.href || location.pathname.startsWith(link.href + '/')
                   ? 'text-accent'
                   : 'text-slate-400 hover:text-white'
-                }`}
+                } after:absolute after:inset-0 after:rounded-lg after:content-[''] after:z-[-1] hover:after:animate-pulse-once`}
             >
               {link.name}
             </Link>

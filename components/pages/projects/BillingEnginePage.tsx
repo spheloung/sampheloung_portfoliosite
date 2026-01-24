@@ -29,7 +29,7 @@ const BillingEnginePage: React.FC = () => {
                     transition={{ delay: 0.2, duration: 0.6 }}
                 >
                     <span className="text-accent uppercase tracking-widest text-sm font-medium">Project</span>
-                    <h1 className="text-5xl md:text-6xl font-bold text-white mt-2 mb-4">Billing Engine</h1>
+                    <h1 className="text-5xl md:text-6xl font-bold text-white mt-2 mb-4">Til - an automated billing engine</h1>
                     <p className="text-xl text-slate-400">Automated billing and invoicing system</p>
                 </motion.div>
 

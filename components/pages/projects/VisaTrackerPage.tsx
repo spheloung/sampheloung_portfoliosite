@@ -29,7 +29,7 @@ const VisaTrackerPage: React.FC = () => {
                     transition={{ delay: 0.2, duration: 0.6 }}
                 >
                     <span className="text-accent uppercase tracking-widest text-sm font-medium">Project</span>
-                    <h1 className="text-5xl md:text-6xl font-bold text-white mt-2 mb-4">VisaTracker</h1>
+                    <h1 className="text-5xl md:text-6xl font-bold text-white mt-2 mb-4">VisaTracker Pro</h1>
                     <p className="text-xl text-slate-400">Immigration visa tracking application</p>
                 </motion.div>
 

@@ -11,8 +11,8 @@ interface ProjectCard {
 }
 
 const projects: ProjectCard[] = [
-    { id: '1', slug: 'billing-engine', title: 'Billing Engine', description: 'Automated billing and invoicing system' },
-    { id: '2', slug: 'visa-tracker', title: 'VisaTracker', description: 'Immigration visa tracking application' },
+    { id: '1', slug: 'billing-engine', title: 'Til - an automated billing engine', description: 'Automated billing and invoicing system' },
+    { id: '2', slug: 'visa-tracker', title: 'VisaTracker Pro', description: 'Immigration visa tracking application' },
     { id: '3', slug: 'portfolio-website', title: 'Portfolio Website', description: 'This portfolio website' },
     { id: '4', slug: 'rise-of-china', title: 'The Rise of China', description: 'Data visualization project' },
 ];

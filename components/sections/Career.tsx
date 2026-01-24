@@ -51,12 +51,13 @@ const Career: React.FC = () => {
   return (
     <section id="career" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle title="Career History" subtitle="Experience" />
+
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
           {/* Left Column: Summary Text */}
           <div className="lg:col-span-5 flex flex-col justify-center">
+            <SectionTitle title="Career History" subtitle="Experience" />
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -67,6 +68,10 @@ const Career: React.FC = () => {
               <p className="mb-6">
                 My professional journey has been driven by solving complex problems and delivering solutions that can be
                 quickly adopted by Go-To-Market teams to improve efficiency.
+              </p>
+              <p className="mb-6">
+                I have helped organisations scale from small single market teams to global organisations with
+                operations across multiple continents.
               </p>
               <p className="mb-6">
                 I thrive in dynamic and fast paced environments where technical precision meets business strategy,
