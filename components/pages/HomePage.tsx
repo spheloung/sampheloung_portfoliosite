@@ -11,8 +11,8 @@ const HomePage: React.FC = () => {
         <>
             <Hero />
             <About />
-            <Certifications />
             <Career />
+            <Certifications />
             <Projects />
             <Photography />
         </>

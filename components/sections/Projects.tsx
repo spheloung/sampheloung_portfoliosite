@@ -47,7 +47,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle title="Selected Projects" subtitle="Work" />
+        <SectionTitle title="Projects" subtitle="Work" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
