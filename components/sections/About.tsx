@@ -17,7 +17,7 @@ const About: React.FC = () => {
             className="relative aspect-[3/4] w-full max-w-md mx-auto md:mx-0 rounded-2xl overflow-hidden bg-surfaceHighlight border border-white/5 group"
           >
             <img
-              src="/images/about/Profile-Pic.webp"
+              src="/images/Profile-Pic.webp"
               alt="Sam Pheloung"
               className="w-full h-full object-cover transition-all duration-700 ease-out scale-105 group-hover:scale-100"
             />

@@ -13,19 +13,19 @@ const certifications: Certification[] = [
   {
     id: '1',
     name: 'SF App Builder',
-    image: '/images/about/SF-App-Builder-Badge.webp',
+    image: '/images/SF-App-Builder-Badge.webp',
     scale: 1,
   },
   {
     id: '2',
     name: 'SF Admin',
-    image: '/images/about/SF-Admin-Badge.webp',
+    image: '/images/SF-Admin-Badge.webp',
     scale: 1,
   },
   {
     id: '3',
     name: 'MIRAD',
-    image: '/images/about/UC-Badge.webp',
+    image: '/images/UC-Badge.webp',
     scale: 1,
   }
 ];
