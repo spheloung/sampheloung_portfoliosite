@@ -14,7 +14,7 @@ const projects: ProjectWithLink[] = [
     title: 'Til - an automated billing engine',
     description: 'A Python-based engine using Salesforce and App data to generate invoices in Xero.',
     tags: ['Python', 'Salesforce', 'SQL'],
-    image: '/images/projects/project-1.svg',
+    image: '/images/projects/billing-engine/til-card.webp',
     href: '/projects/billing-engine'
   },
   {
@@ -28,7 +28,7 @@ const projects: ProjectWithLink[] = [
   {
     id: '3',
     title: 'Portfolio Website',
-    description: 'End-to-end implementation of Salesforce CPQ reducing quote generation time by 75%.',
+    description: 'Experimented with AI to help build this portfolio website.',
     tags: ['Next.js', 'Claude', 'Framer Motion'],
     image: '/images/projects/project-3.svg',
     href: '/projects/portfolio-website'

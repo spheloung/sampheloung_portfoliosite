@@ -6,15 +6,35 @@ import { SectionTitle } from '../ui/Elements';
 interface LocationCard {
   id: string;
   name: string;
-  imageUrl?: string;
+  image: string;
   href: string;
 }
 
 const locations: LocationCard[] = [
-  { id: '1', name: 'Antarctica', href: '/photography/antarctica' },
-  { id: '2', name: 'Tekapo', href: '/photography/tekapo' },
-  { id: '3', name: 'Canterbury', href: '/photography/canterbury' },
-  { id: '4', name: 'Coromandel', href: '/photography/coromandel' },
+  {
+    id: '1',
+    name: 'Antarctica',
+    href: '/photography/antarctica',
+    image: '/images/photography/antarctica/Gentoo-Conga.webp'
+  },
+  {
+    id: '2',
+    name: 'Tekapo',
+    href: '/photography/tekapo',
+    image: '/images/photography/tekapo/Church-of-the-Good-Shepard.webp'
+  },
+  {
+    id: '3',
+    name: 'Canterbury',
+    href: '/photography/canterbury',
+    image: '/images/photography/antarctica/Gentoo-Conga.webp'
+  },
+  {
+    id: '4',
+    name: 'Coromandel',
+    href: '/photography/coromandel',
+    image: '/images/photography/antarctica/Gentoo-Conga.webp'
+  },
 ];
 
 const Photography: React.FC = () => {
@@ -112,19 +132,26 @@ const Photography: React.FC = () => {
                 <Link to={location.href} className="block group h-full">
                   {/* Card */}
                   <div className="relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-sm h-80 flex flex-col transition-all duration-300 hover:border-accent/20">
-                    {/* Image placeholder area */}
-                    <div className="flex-1 bg-gradient-to-br from-slate-800/50 to-slate-900/80 flex items-center justify-center">
-                      <span className="text-slate-500 text-sm">Photo placeholder</span>
+                    {/* Image Area */}
+                    <div className="absolute inset-0">
+                      <img
+                        src={location.image}
+                        alt={location.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     </div>
 
                     {/* Card footer */}
-                    <div className="p-6 border-t border-white/10">
+                    <div className="relative mt-auto p-6 z-10">
                       <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors">{location.name}</h3>
-                      <p className="text-slate-500 text-sm mt-1">Location</p>
+                      <p className="text-slate-400 text-sm mt-1 flex items-center gap-1">
+                        View Gallery
+                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </p>
                     </div>
-
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
                 </Link>
               </motion.div>

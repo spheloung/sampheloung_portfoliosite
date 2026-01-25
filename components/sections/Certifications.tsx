@@ -12,17 +12,20 @@ interface Certification {
 const certifications: Certification[] = [
   {
     id: '1',
-    name: 'Salesforce Platform App Builder',
+    name: 'SF App Builder',
+    image: '/images/about/SF-App-Builder-Badge.webp',
     scale: 1,
   },
   {
     id: '2',
-    name: 'Salesforce Administrator',
+    name: 'SF Admin',
+    image: '/images/about/SF-Admin-Badge.webp',
     scale: 1,
   },
   {
     id: '3',
-    name: 'Masters of International Relations and Diplomacy',
+    name: 'MIRAD',
+    image: '/images/about/UC-Badge.webp',
     scale: 1,
   }
 ];

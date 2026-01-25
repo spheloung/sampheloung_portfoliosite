@@ -14,15 +14,16 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative aspect-[3/4] w-full max-w-md mx-auto md:mx-0 rounded-2xl overflow-hidden bg-surfaceHighlight border border-white/5 flex items-center justify-center group"
+            className="relative aspect-[3/4] w-full max-w-md mx-auto md:mx-0 rounded-2xl overflow-hidden bg-surfaceHighlight border border-white/5 group"
           >
-            {/* Abstract placeholder styling */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-blue-900/10 opacity-50" />
+            <img
+              src="/images/about/Profile-Pic.webp"
+              alt="Sam Pheloung"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out scale-105 group-hover:scale-100"
+            />
 
-            {/* Placeholder Text */}
-            <h3 className="relative z-10 text-4xl md:text-5xl font-bold text-white/20 text-center leading-tight p-6 group-hover:text-white/30 transition-colors select-none">
-              Image<br />Goes<br />Here
-            </h3>
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-500" />
 
             {/* Decorative Corner Accents */}
             <div className="absolute top-4 left-4 w-12 h-12 border-l border-t border-white/10 rounded-tl-lg" />
@@ -41,17 +42,16 @@ const About: React.FC = () => {
               className="text-slate-300 leading-relaxed text-lg space-y-8"
             >
               <p>
-                Hi, I'm Sam. I operate at the intersection of
-                business strategy and technical execution. My passion
-                lies in untangling complex operational knots and
-                weaving them into streamlined, automated systems that
-                drive revenue.
+                I operate at the intersection of business strategy and technical execution.
+                My passion lies in untangling operational complexity—the systems, processes,
+                and data silos that slow down revenue teams—and weaving them into scalable,
+                automated solutions.
               </p>
               <p>
-                Operating as a bridge between the Go-To-Market teams, engineering teams
-                and senior leadership, I translate business requirements into
-                robust systems that support revenue, compliance and
-                decision-making at scale.
+                I've worked as a strategic bridge between Go-To-Market teams, engineering,
+                and senior leadership. I translate business requirements (the what and why)
+                into robust technical systems (the how) that support revenue generation,
+                compliance, and data-driven decision-making at scale.
               </p>
             </motion.div>
           </div>

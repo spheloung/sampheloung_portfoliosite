@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
         {/* Title with Matrix Rain Effect */}
         <div className="min-h-[160px] flex items-center justify-center mb-12">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-tight">
-            <MatrixText text="Rev-Ops & Automation Specialist" baseDelay={0} />
+            <MatrixText text="RevOps Systems Built for Scale" baseDelay={0} />
           </h1>
         </div>
 
@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 2.5, ease: "easeOut" }}
           className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 mt-16 leading-relaxed"
         >
-          I build scalable systems and automate workflows to optimise revenue engines for high-growth companies.
+          I create and implement automated systems that save time and fuel high-growth companies.
         </motion.p>
 
         <motion.div

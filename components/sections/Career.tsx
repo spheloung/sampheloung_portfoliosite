@@ -70,8 +70,8 @@ const Career: React.FC = () => {
                 quickly adopted by Go-To-Market teams to improve efficiency.
               </p>
               <p className="mb-6">
-                I have helped organisations scale from small single market teams to global organisations with
-                operations across multiple continents.
+                I've helped organizations scale from lean regional teams to global operations
+                across multiple continents.
               </p>
               <p className="mb-6">
                 I thrive in dynamic and fast paced environments where technical precision meets business strategy,
