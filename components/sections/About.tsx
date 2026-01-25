@@ -19,7 +19,7 @@ const About: React.FC = () => {
             <img
               src="/images/about/Profile-Pic.webp"
               alt="Sam Pheloung"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out scale-105 group-hover:scale-100"
+              className="w-full h-full object-cover transition-all duration-700 ease-out scale-105 group-hover:scale-100"
             />
 
             {/* Overlay Gradient */}

@@ -56,14 +56,14 @@ const Career: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
           {/* Left Column: Summary Text */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
+          <div className="lg:col-span-6 flex flex-col justify-center">
             <SectionTitle title="Career History" subtitle="Experience" />
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="prose prose-invert prose-lg text-slate-400"
+              className="text-slate-300 leading-relaxed text-lg space-y-8"
             >
               <p className="mb-6">
                 My professional journey has been driven by solving complex problems and delivering solutions that can be
@@ -82,7 +82,7 @@ const Career: React.FC = () => {
 
           {/* Right Column: The Vertical Timeline */}
           {/* We use a fixed height container for the timeline visual */}
-          <div className="lg:col-span-7 relative h-[700px] mt-8 lg:mt-0">
+          <div className="lg:col-span-6 relative h-[700px] mt-8 lg:mt-0">
 
             {/* FULL HEIGHT CENTER LINE */}
             <div className="absolute left-1/2 top-[55px] bottom-0 w-px bg-gradient-to-b from-white/40 via-white/20 to-white/5 -translate-x-1/2" />
