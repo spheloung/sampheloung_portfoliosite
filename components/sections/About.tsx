@@ -19,6 +19,7 @@ const About: React.FC = () => {
             <img
               src="/images/Profile-Pic.webp"
               alt="Sam Pheloung"
+              loading="lazy"
               className="w-full h-full object-cover transition-all duration-700 ease-out scale-105 group-hover:scale-100"
             />
 

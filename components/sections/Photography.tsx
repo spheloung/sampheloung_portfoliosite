@@ -135,6 +135,7 @@ const Photography: React.FC = () => {
                     <img
                       src={location.image}
                       alt={location.name}
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

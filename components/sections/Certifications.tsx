@@ -50,6 +50,7 @@ const Certifications: React.FC = () => {
                   <img
                     src={cert.image}
                     alt={cert.name}
+                    loading="lazy"
                     className="h-24 md:h-28 w-auto object-contain relative z-10 transition-transform duration-500 group-hover:scale-110 drop-shadow-2xl"
                     style={{ transform: `scale(${cert.scale || 1})` }}
                   />

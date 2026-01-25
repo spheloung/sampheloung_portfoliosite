@@ -82,107 +82,124 @@ const Career: React.FC = () => {
 
           {/* Right Column: The Vertical Timeline */}
           {/* We use a fixed height container for the timeline visual */}
-          <div className="lg:col-span-6 relative h-[700px] mt-8 lg:mt-0">
+          <div className="lg:col-span-6 relative lg:h-[700px] mt-8 lg:mt-0">
 
-            {/* FULL HEIGHT CENTER LINE */}
-            <div className="absolute left-1/2 top-[55px] bottom-0 w-px bg-gradient-to-b from-white/40 via-white/20 to-white/5 -translate-x-1/2" />
+            {/* --- MOBILE/TABLET VIEW (Simple Stack) --- */}
+            <div className="lg:hidden space-y-8 pl-4 border-l border-white/10 ml-2">
+              {timelineItems.map((item) => (
+                <div key={item.date} className="relative pl-6">
+                  {/* Dot on line */}
+                  <div className="absolute -left-[21px] top-1.5 w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
 
-            {/* ARROW (TODAY) - FIXED AT TOP (0%) */}
-            <motion.div
-              initial={{ opacity: 0, x: "-50%", y: -10 }}
-              whileInView={{ opacity: 1, x: "-50%", y: 0 }}
-              viewport={{ once: true }}
-              className="absolute left-1/2 top-0 flex flex-col items-center z-20"
-            >
-              <span className="text-accent text-lg font-bold mb-2 whitespace-nowrap">
-                The next big thing
-              </span>
-              <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[16px]
-                              border-l-transparent border-r-transparent border-b-accent" />
-            </motion.div>
-
-            {/* TIMELINE ITEMS */}
-            {timelineItems.map((item, index) => {
-              const topPercent = getPercentFromTop(item.date);
-
-              return (
-                <motion.div
-                  key={item.date}
-                  initial={{ opacity: 0, scale: 0.9, x: "-50%" }}
-                  whileInView={{ opacity: 1, scale: 1, x: "-50%" }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  // Master Container: Positioned at the specific % from top.
-                  // We use a flex row to align everything relative to the vertical center of the ROW.
-                  className="absolute left-1/2 w-full flex items-center justify-center pointer-events-none"
-                  style={{ top: `${topPercent}%` }}
-                >
-
-                  {/* LEFT SIDE CONTENT */}
-                  <div className="flex-1 flex justify-end items-center pr-8 relative">
-                    {/* If item is on the LEFT, show Role/Company here */}
-                    {item.side === "left" && (
-                      <div className="text-right pointer-events-auto">
-                        <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{item.role}</h4>
-                        <span className="text-sm text-slate-500 font-medium mt-1">{item.company}</span>
-                      </div>
-                    )}
-                    {/* If item is on the RIGHT, show Date here */}
-                    {item.side === "right" && (
-                      <div className="text-right pointer-events-auto">
-                        <span className="font-mono text-sm text-slate-500">
-                          {new Date(item.date).toLocaleDateString("en-GB", {
-                            month: "long",
-                            year: "numeric",
-                          })}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Left Connector Line */}
-                    {/* Touches the dot on the right side of this box */}
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20" />
-                  </div>
+                  <h4 className="text-xl font-bold text-white leading-tight">{item.role}</h4>
+                  <span className="text-base text-slate-400 font-medium block mt-1">{item.company}</span>
+                  <span className="font-mono text-sm text-slate-500 block mt-2">
+                    {new Date(item.date).toLocaleDateString("en-GB", {
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              ))}
+            </div>
 
 
-                  {/* CENTER NODE DOT */}
-                  {/* Static flex item. 'shrink-0' ensures it stays 12x12px. */}
-                  {/* z-10 puts it above the vertical line. */}
-                  <div className="relative z-10 shrink-0">
-                    <div className="w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-                  </div>
+            {/* --- DESKTOP VIEW (Central Line Animation) --- */}
+            <div className="hidden lg:block relative h-full">
+              {/* FULL HEIGHT CENTER LINE */}
+              <div className="absolute left-1/2 top-[55px] bottom-0 w-px bg-gradient-to-b from-white/40 via-white/20 to-white/5 -translate-x-1/2" />
+
+              {/* ARROW (TODAY) - FIXED AT TOP (0%) */}
+              <motion.div
+                initial={{ opacity: 0, x: "-50%", y: -10 }}
+                whileInView={{ opacity: 1, x: "-50%", y: 0 }}
+                viewport={{ once: true }}
+                className="absolute left-1/2 top-0 flex flex-col items-center z-20"
+              >
+                <span className="text-accent text-lg font-bold mb-2 whitespace-nowrap">
+                  The next big thing
+                </span>
+                <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-b-[16px]
+                                 border-l-transparent border-r-transparent border-b-accent" />
+              </motion.div>
+
+              {/* TIMELINE ITEMS */}
+              {timelineItems.map((item, index) => {
+                const topPercent = getPercentFromTop(item.date);
+
+                return (
+                  <motion.div
+                    key={item.date}
+                    initial={{ opacity: 0, scale: 0.9, x: "-50%" }}
+                    whileInView={{ opacity: 1, scale: 1, x: "-50%" }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 }}
+                    // Master Container: Positioned at the specific % from top.
+                    // We use a flex row to align everything relative to the vertical center of the ROW.
+                    className="absolute left-1/2 w-full flex items-center justify-center pointer-events-none"
+                    style={{ top: `${topPercent}%` }}
+                  >
+                    {/* LEFT SIDE CONTENT */}
+                    <div className="flex-1 flex justify-end items-center pr-8 relative">
+                      {/* If item is on the LEFT, show Role/Company here */}
+                      {item.side === "left" && (
+                        <div className="text-right pointer-events-auto">
+                          <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{item.role}</h4>
+                          <span className="text-sm text-slate-500 font-medium mt-1">{item.company}</span>
+                        </div>
+                      )}
+                      {/* If item is on the RIGHT, show Date here */}
+                      {item.side === "right" && (
+                        <div className="text-right pointer-events-auto">
+                          <span className="font-mono text-sm text-slate-500">
+                            {new Date(item.date).toLocaleDateString("en-GB", {
+                              month: "long",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Left Connector Line */}
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20" />
+                    </div>
 
 
-                  {/* RIGHT SIDE CONTENT */}
-                  <div className="flex-1 flex justify-start items-center pl-8 relative">
-                    {/* Right Connector Line */}
-                    {/* Touches the dot on the left side of this box */}
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20" />
+                    {/* CENTER NODE DOT */}
+                    <div className="relative z-10 shrink-0">
+                      <div className="w-3 h-3 bg-accent rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                    </div>
 
-                    {/* If item is on the LEFT, show Date here */}
-                    {item.side === "left" && (
-                      <div className="text-left pointer-events-auto">
-                        <span className="font-mono text-sm text-slate-500">
-                          {new Date(item.date).toLocaleDateString("en-GB", {
-                            month: "long",
-                            year: "numeric",
-                          })}
-                        </span>
-                      </div>
-                    )}
-                    {/* If item is on the RIGHT, show Role/Company here */}
-                    {item.side === "right" && (
-                      <div className="text-left pointer-events-auto">
-                        <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{item.role}</h4>
-                        <span className="text-sm text-slate-500 font-medium mt-1">{item.company}</span>
-                      </div>
-                    )}
-                  </div>
 
-                </motion.div>
-              );
-            })}
+                    {/* RIGHT SIDE CONTENT */}
+                    <div className="flex-1 flex justify-start items-center pl-8 relative">
+                      {/* Right Connector Line */}
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20" />
 
+                      {/* If item is on the LEFT, show Date here */}
+                      {item.side === "left" && (
+                        <div className="text-left pointer-events-auto">
+                          <span className="font-mono text-sm text-slate-500">
+                            {new Date(item.date).toLocaleDateString("en-GB", {
+                              month: "long",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      )}
+                      {/* If item is on the RIGHT, show Role/Company here */}
+                      {item.side === "right" && (
+                        <div className="text-left pointer-events-auto">
+                          <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{item.role}</h4>
+                          <span className="text-sm text-slate-500 font-medium mt-1">{item.company}</span>
+                        </div>
+                      )}
+                    </div>
+
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

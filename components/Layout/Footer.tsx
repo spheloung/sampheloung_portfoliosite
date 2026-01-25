@@ -1,7 +1,10 @@
-import React from 'react';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const [showEmailTooltip, setShowEmailTooltip] = useState(false);
+
   return (
     <footer id="contact" className="relative py-20 border-t border-white/5 bg-background">
       <div className="max-w-4xl mx-auto px-6 text-center">
@@ -53,19 +56,42 @@ const Footer: React.FC = () => {
           </form>
         </div>
 
-        <div className="flex justify-center gap-8 mb-12">
-          <a href="#" className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110">
+        <div className="flex justify-center gap-8 mb-12 relative">
+          <a href="https://www.linkedin.com/in/sam-pheloung-b7060b197/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110">
             <Linkedin size={24} />
           </a>
-          <a href="#" className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110">
+          <a href="https://www.github.com/spheloung" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110">
             <Github size={24} />
           </a>
-          <a href="#" className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110">
-            <Twitter size={24} />
-          </a>
-          <a href="mailto:sam@example.com" className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110">
-            <Mail size={24} />
-          </a>
+
+          {/* Email Icon with Popup */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                setShowEmailTooltip(true);
+                setTimeout(() => setShowEmailTooltip(false), 3000); // Hide after 3s
+                window.location.href = "mailto:sam@example.com";
+              }}
+              aria-label="Email"
+              className="text-slate-500 hover:text-white transition-colors duration-300 transform hover:scale-110"
+            >
+              <Mail size={24} />
+            </button>
+
+            {/* Mini Modal / Tooltip */}
+            <AnimatePresence>
+              {showEmailTooltip && (
+                <motion.div
+                  initial={{ opacity: 0, x: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, x: 20, scale: 1 }}
+                  exit={{ opacity: 0, x: 10, scale: 0.9 }}
+                  className="absolute left-full top-1/2 -translate-y-1/2 bg-white text-black text-xs font-bold py-2 px-3 rounded-lg shadow-xl whitespace-nowrap z-50 pointer-events-none after:content-[''] after:absolute after:right-full after:top-1/2 after:-translate-y-1/2 after:border-8 after:border-y-transparent after:border-l-transparent after:border-r-white"
+                >
+                  Look forward to hearing from you!
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         <div className="text-slate-600 text-sm">
