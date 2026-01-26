@@ -4,22 +4,9 @@ This folder contains all images for the portfolio website, organized by page/sec
 
 ## Directory Structure
 
-```
 images/
-├── hero/                  # Hero section images
-├── about/                 # About page images
-├── career/                # Career page images
-├── projects/              # Project images
-│   ├── visa-tracker/
-│   ├── billing-engine/
-│   ├── portfolio-website/
-│   └── rise-of-china/
-└── photography/           # Photography location images
-    ├── antarctica/
-    ├── tekapo/
-    ├── canterbury/
-    └── coromandel/
-```
+├── Photography/           # Dedicated photography portfolio images
+└── [all other images]     # General portfolio images (Hero, Projects, About, etc.)
 
 ## Image Guidelines
 

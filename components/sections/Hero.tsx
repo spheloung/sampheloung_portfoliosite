@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 2.5, ease: "easeOut" }}
           className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 mt-16 leading-relaxed"
         >
-          I create and implement automated systems that save time and fuel high-growth companies.
+          I design and implement automated RevOps workflows that cut manual work and unlock scalable revenue growth.
         </motion.p>
 
         <motion.div
