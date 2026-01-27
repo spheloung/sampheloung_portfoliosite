@@ -1,32 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionTitle } from '../ui/Elements';
 
 // Real images from public/images/photography
 const uniquePhotos = [
-  { src: '/images/Photography/Gentoo-Conga.webp', alt: 'Gentoo Conga' },
-  { src: '/images/Photography/Church-of-the-Good-Shepard.webp', alt: 'Church of the Good Shepard' },
-  { src: '/images/Photography/Profile-Pic.webp', alt: 'Profile Picture' },
-  { src: '/images/Photography/til-card.webp', alt: 'Automated Billing Engine' },
-  { src: '/images/Photography/project-2.svg', alt: 'Project Diagram' },
-  { src: '/images/Photography/photo-5.svg', alt: 'Photo 5' },
+  { src: '/images/Photography/gentoo-conga.webp', alt: 'Gentoo Conga' },
+  { src: '/images/Photography/good-shepard.webp', alt: 'Church of the Good Shepard' },
+  { src: '/images/Photography/lake-tekapo.webp', alt: 'Lake Tekapo' },
+  { src: '/images/Photography/skua.webp', alt: 'Skua' },
+  { src: '/images/Photography/mountain-cruise.webp', alt: 'Mountain Cruise' },
+  { src: '/images/Photography/whalers-hut.webp', alt: 'Whalers Hut' },
+  { src: '/images/Photography/iceberg.webp', alt: 'Iceberg' },
+  { src: '/images/Photography/mountain-glacier.webp', alt: 'Mountain Glacier' },
 ];
 
-// Duplicate to reach a decent gallery size (12 items)
-const photos = [...uniquePhotos, ...uniquePhotos].map((photo, i) => ({
+// Gallery Photos
+const photos = uniquePhotos.map((photo, i) => ({
   id: i.toString(),
   ...photo
 }));
 
 const Photography: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (selectedPhotoIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        setSelectedPhotoIndex(prev => (prev === null || prev === 0 ? photos.length - 1 : prev - 1));
+      } else if (e.key === 'ArrowRight') {
+        setSelectedPhotoIndex(prev => (prev === null || prev === photos.length - 1 ? 0 : prev + 1));
+      } else if (e.key === 'Escape') {
+        setSelectedPhotoIndex(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedPhotoIndex]);
 
   return (
     <section id="photography" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle title="Photography" subtitle="Perspective" />
 
-        <p className="text-slate-400 text-lg mb-12 -mt-8">Text goes here...</p>
+        <p className="text-slate-400 text-lg mb-12 -mt-8">Explore some of my favourite shots and incredible adventures around the world.</p>
 
         {/* Gallery Container */}
         <div className="relative">
@@ -43,7 +64,8 @@ const Photography: React.FC = () => {
               {photos.map((photo, index) => (
                 <div
                   key={photo.id}
-                  className="break-inside-avoid relative group rounded-xl overflow-hidden bg-white/5 border border-white/10"
+                  className="break-inside-avoid relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 cursor-pointer"
+                  onClick={() => setSelectedPhotoIndex(index)}
                 >
                   <img
                     src={photo.src}
@@ -88,6 +110,71 @@ const Photography: React.FC = () => {
 
         </div>
       </div>
+
+      {/* Fullscreen Modal */}
+      <AnimatePresence>
+        {selectedPhotoIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
+            onClick={() => setSelectedPhotoIndex(null)}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedPhotoIndex(null)}
+              className="absolute top-6 right-6 z-50 p-2 text-white/50 hover:text-white transition-colors"
+              aria-label="Close modal"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPhotoIndex((prev) => (prev === null || prev === 0 ? photos.length - 1 : prev - 1));
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-black/50 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10"
+              aria-label="Previous photo"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPhotoIndex((prev) => (prev === null || prev === photos.length - 1 ? 0 : prev + 1));
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-black/50 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10"
+              aria-label="Next photo"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Image */}
+            <motion.div
+              layoutId={photos[selectedPhotoIndex].id}
+              className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={photos[selectedPhotoIndex].src}
+                alt={photos[selectedPhotoIndex].alt}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              />
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

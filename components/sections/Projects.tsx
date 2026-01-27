@@ -96,37 +96,83 @@ const projects: Project[] = [
     title: 'Pardot -> Hubspot',
     description: 'Optimising the marketing engine across multiple platforms',
     longDescription: `
-      <p>Led the migration and synchronization strategy between Pardot and Hubspot to unify marketing operations.</p>
+      <p>Building a powerful marketing engine is critical to driving brand awareness and driving warm leads into the pipeline, but choosing which engine to run that off is a difficult decision.</p>
       <br />
-      <p>This project involved complex data mapping, automation workflow translation, and ensuring data integrity across both platforms during the transition period.</p>
+      <p>Pardot, or Account Engagement as it's now known, is a powerful engine, with one of its biggest advantages being that it is natively integrated into all Salesforce data. But there are some major limitations to the tool as well, notably that it is slow and difficult to automate properly. Despite recent improvements in the tool it is still not on the same level as Hubspot for marketing purposes.</p>
+      <br />
+      <p>Ultimately we decided that the best course of action was to transition into Hubspot. I led the migration efforts, ensuring that the system had a smooth and reliable integration with Salesforce that surfaced relevant marketing prospects in Hubspot and pushed Marketing Qualified Leads (MQLs) to Salesforce to be picked up by the Sales team.</p>
+      <br />
+      <p>We also needed to ensure the proper migration of campaigns, email automations and marketing content to Hubspot. Working closely with the Marketing team we were able to ensure that all the required information was moved across seamlessly and improvements to existing workflows were implemented in the process.</p>
+      <br />
+      <p>This transition to a more powerful, reliable and workable system doubled the efficiency of the marketing team and allowed them to focus on generating world class content rather than implementing its delivery system.</p>
+      <br />
+      <p>If your teams are hampered down by inefficient tooling get in touch to see how I can help.</p>
     `,
     tags: ['Pardot', 'Hubspot', 'SQL'],
-    image: '/images/project-2.svg'
+    image: '/images/pardot-hubspot.webp'
   },
   {
     id: '4',
     title: 'VisaTracker Pro',
     description: 'Full-stack web application to track the number of days left before a visa expires.',
     longDescription: `
-      <p>VisaTracker Pro helps international residents manage their visa status with confidence.</p>
+      <p>This is a personal project I have been working on and is my first attempt at solo developing a full stack web application leveraging AI.</p>
       <br />
-      <p><strong>Tech Stack:</strong> React, Supabase, and Custom Auth.</p>
-      <p>Features include automated email reminders, document storage, and a timeline view of visa milestones.</p>
+      <p>This tool was born out of a simple desire to be able to track the amount of days I had left while travelling through Europe. Within the Schengen area on a New Zealand Passport you are allowed 90 days in the continent within a 180 day window. Rather than pull out a spreadsheet I decided to try this so-called ‘vibe coding’ out for myself. </p>
+      <br />
+      <p>Using Google's AI Studio I was able to quickly generate a working prototype and confirm in minutes how many trips to Europe I could plan over the summer. I then downloaded this code, opened it up in Google’s AntiGravity IDE and started experimenting further. I was able to generate a sleek front-end to the app and through integrations with Supabase set up a solid back-end architecture that can scale to handle multiple users with different requirements.</p>
+      <br />
+      <p>While by no means a software engineer, I have worked closely and reported to software engineers in my career, so I have been able to leverage those skills effectively to avoid many of the pitfalls that impact non technical developers. My deep understanding of information and data security thanks to my experience getting ISO27001 certified as well as understanding the importance of solid back end architecture through my Salesforce platform app building experience I am creating a reliable piece of software on my own.</p>
+      <br />
+      <p>The application is still in development and I will look to publish soon to help me and friends accurately track their visa requirements.</p>
+      <br />
+      <p>If you need custom automations that leverage AI, get in touch below.</p>
     `,
     tags: ['React', 'AntiGravity', 'SupaBase'],
-    image: '/images/project-2.svg'
+    image: '/images/visa-tracker.webp'
   },
   {
     id: '5',
     title: 'Diplomacy and RevOps',
     description: 'The link between diplomacy and Revenue Operations.',
     longDescription: `
-      <p>An academic research project exploring the parallels between international diplomacy and modern Revenue Operations (RevOps).</p>
-      <br />
-      <p>This study analyzes negotiation tactics, stakeholder management, and conflict resolution strategies applicable to both fields.</p>
+      <p>It is not uncommon for people with degrees in political science and international relations to end up working in the Revenue Operations space. As someone who has followed that path it is very clear as to why that is.</p>
+<br />
+<p>Because what is Revenue Operations Manager but the diplomat of the Go-to-Market team.</p>
+<br />
+<p>Now that I have made that connection, you can indulge my academic flexing and let me discuss my topic of study at the University of Canterbury.</p>
+<br />
+<p>I wrote my dissertation on the Chinese Military Technology Transfer Strategy and the Implications on New Zealand. Under the supervision of Professor Anne-Marie Brady, one of New Zealand's leading experts on China, I did a deep dive into various strategies employed by the Chinese government to acquire new technology and expand its military capabilities.</p>
+<br />
+<p>This can be broken down into four strategies, Acquisition, Espionage, Academic & 1000 Talents.</p>
+<br />
+<p><strong>Acquisition:</strong></p>
+<p>Large military technology companies are not up for sale, so buying Lockheed Martin is out of the question. But these companies don't build everything. If you go far enough down the chain of sub contractors you can acquire companies that build certain components. Acquire enough of these companies and like the pieces of a puzzle you can start to gain a clearer picture of what you're building. One such example is the acquisition of the company that makes the next-gen screens installed in the F-35 fighter jet. Leveraging this strategy China was able to build a working prototype of the F-35 before it was deployed by the United States.</p>
+<br />
+<p><strong>Espionage:</strong></p>
+<p>Why buy when you can steal. Espionage is a strategy used by every major player on the international stage, including China, and they are good at it. Whether through cyber attacks, corporate espionage or the coercion of their own citizens to act as agents for the state, China can get their hands on just about anything. There have been reports of tourists entering restricted zones of factories producing critical assets for Germany, and there is a reason high level executives take blank devices (phones, laptops etc.) on business trips to China. Protecting IP is critical, and China wants it to help develop their economy and military.</p>
+<br />
+<p><strong>Academic:</strong></p>
+<p>Research and development is a critical part of developing modern military capabilities and some of the best centres of this are western universities. China has a well documented strategy of sending their top students to elite western institutions to study at a high level, almost exclusively in the STEM fields. The research they conduct is often smuggled out of the country they are studying in and sent back to China to aid in their military development, and should they fail to get the research, they have the added bonus of getting back their highly educated citizens who can move into the Chinese workforce and help develop their economy and military further forward.</p>
+<br />
+<p><strong>1000 Talents:</strong></p>
+<p>China is not only focused on sending its best and brightest out into the world to extract knowledge, but also bringing the world's leading minds to China. This is called the 1000 Talents program. Through this program the Chinese government offers enticing incentives to the world's leading minds in science and engineering to work at the cutting edge of Chinese innovation</p>
+<br />
+<p><strong>What does this have to do with New Zealand?</strong></p>
+<p>New Zealand is not renowned for its development of military technology, so why would they be at risk of aiding China's military? And why does it matter?</p>
+<br />
+<p>This cuts to the heart of the Chinese strategy. Getting military technology is good. But getting civilian technology that has military applications is even better. This is the dual use technology problem.</p>
+<br />
+<p>Whether it is new 5g technology that improves connection and data transfer speeds but has the consequence of being able to accurately track the users location immediately (researched by a Chinese student at MIT) to buying a small New Zealand company run out of a garage in Christchurch dedicated to developing a working jetpack. There is a wealth of technology out there that can be used for unintended military development.</p>
+<br />
+<p>For New Zealand this is important because as a signatory to the Wassenaar Agreement, we are prohibited from selling any technology with a military use to a country that is not also a signatory of this agreement. So is selling jetpack technology a breach of this agreement? Will that technology be used by rich thrill seekers? Firefighters rescuing people from sky scrapers? Or will it be strapped to the back of a soldier and used on the battlefield?</p>
+<br />
+<p>These are not easy questions to answer, but they are important things to consider as New Zealand navigates the evolving geo-political landscape.</p>
+<br />
+<p>If you would like to know more about this you can read the paper I co-authored with Professor Anne-Marie Brady published on the <a href="https://www.wilsoncenter.org/publication/holding-pen-one-hand-gripping-gun-other" target="_blank" class="text-blue-400 underline hover:text-blue-300 transition-colors">Wilson Center's Kissinger Institue on China</a> or you can get in touch below to discuss.</p>
     `,
     tags: ['Research', 'International Relations', 'Academic'],
-    image: '/images/project-4.svg'
+    image: '/images/diplomacy.webp'
   }
 ];
 
@@ -187,7 +233,27 @@ const Projects: React.FC = () => {
     return () => container.removeEventListener('scroll', handleScroll);
   }, [activeIndex]);
 
+  // Keyboard navigation for Projects Modal
+  useEffect(() => {
+    if (!selectedId) return;
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const currentIndex = projects.findIndex(p => p.id === selectedId);
+
+      if (e.key === 'ArrowLeft') {
+        const prevIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+        setSelectedId(projects[prevIndex].id);
+      } else if (e.key === 'ArrowRight') {
+        const nextIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
+        setSelectedId(projects[nextIndex].id);
+      } else if (e.key === 'Escape') {
+        setSelectedId(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedId]);
   const selectedProject = projects.find(p => p.id === selectedId);
 
   return (
@@ -285,13 +351,44 @@ const Projects: React.FC = () => {
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             />
 
+            {/* Navigation Arrows */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const currentIndex = projects.findIndex(p => p.id === selectedId);
+                const prevIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+                setSelectedId(projects[prevIndex].id);
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-[60] p-3 bg-black/50 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 hidden md:block"
+              aria-label="Previous project"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const currentIndex = projects.findIndex(p => p.id === selectedId);
+                const nextIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
+                setSelectedId(projects[nextIndex].id);
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-[60] p-3 bg-black/50 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-all backdrop-blur-sm border border-white/10 hidden md:block"
+              aria-label="Next project"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
             {/* Modal Content */}
             <motion.div
               layoutId={selectedId}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-5xl bg-[#0F0F10] border border-white/10 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-5xl bg-[#0F0F10] border border-white/10 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col z-50"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
