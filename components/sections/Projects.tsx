@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { SectionTitle, Card, Badge } from '../ui/Elements';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SectionTitle, Card, Badge, Button } from '../ui/Elements';
 import { Project } from '../../types';
 
 const projects: Project[] = [
@@ -7,20 +8,98 @@ const projects: Project[] = [
     id: '1',
     title: 'Automated billing engine',
     description: 'A Python-based engine using Salesforce and App data to generate invoices in Xero.',
+    longDescription: `
+      <p>
+      Anyone in charge of finance will tell you how difficult billing can be,
+      especially when there are multiple complex pricing models to deal with.
+      The largest project I have ever undertaken was tackling this problem. 
+        By the end we had to deal with billing for two distinct products in three
+        countries / currencies with over 12 unique pricing models. This project
+        alone saved 100+ hours a month of manual billing work for over 40 staff.
+      </p>
+      <br />
+      <p>
+        To build this project, we needed to implement a brand new way of storing
+        customer information in Salesforce. This system had to:
+      </p>
+      <ul class="list-disc pl-5 space-y-2 mt-2">
+        <li>Allow the simple creation and approval of new contracts</li>
+        <li>Capture key pricing information for all pricing models</li>
+        <li>Move those contracts through the system automatically</li>
+        <li>Get replaced with a new contract at the end of its term</li>
+      </ul>
+      <br />
+      <p>
+        Once these contracts were approved this whole process had to be an entirely
+        hands off experience. This was achieved by leveraging Salesforce automations to move contracts through the system and update key information.
+      </p>
+      <br />
+      <p>
+        All this contract information was then sent into a Snowflake data lake via
+        ETL tooling to sit alongside platform usage information from the product.
+        The data was then transformed into a workable format for billing
+        purposes.
+      </p>
+      <br />
+      <p>
+        At the end of each month all this data had to be collated and processed by a
+        bespoke billing engine developed in Python. This would capture the relevant
+        contract information from Salesforce, get all the billable work completed
+        that month, generate an invoice and a schedule of work for that customer and
+        send that information via an API directly into the accounting system Xero.
+      </p>
+      <br />
+      <p>
+        Start-ups move fast and change frequently. Building systems that can both
+        change and adapt where necessary is critical. 
+        If you'd like to hear how I can help your business get in touch below.
+      </p>
+      `,
     tags: ['Python', 'Salesforce', 'SQL'],
-    image: '/images/til-card.webp'
+    image: '/images/billing-dataflow.webp'
   },
   {
     id: '2',
     title: 'CS Reporting Dashboard',
     description: 'Reporting on customer success metrics.',
+    longDescription: `
+      <p>
+        Arming your customer success team with the right data and automations is one of the most important things you can do. To do this you need:
+      </p>
+      <ul class="list-disc pl-5 space-y-2 mt-2">
+        <li><strong>CRM Architecture</strong> - Reliable data format</li>
+        <li><strong>Data Accessibility</strong> - It has to be easy to find and understand</li>
+        <li><strong>Portfolio Overview</strong> - See the forest through the trees</li>
+      </ul>
+      <br />
+      <p>
+        Having a reliable data structure is important not just to a data analyst, but to the frontline staff as well. Making sure that everything is in a consistent location reduces confusion & misplaced data and leveraging automations to keep that data alive and moving is critical in fast paced environments. Using Salesforce I was able to ensure that contract information was consistent and I used that to automate parts of the contract renewal process. I also introduced more accurate “at risk” tracking for customers that allowed the CS team to flag high risk customers and provided oversight of this to the leadership team.
+      </p>
+      <br />
+      <p>
+        Providing the team with an in depth dive into customers is also critical. They need to be able to see usage trends, track user engagement with the platform, identify bottlenecks for their clients and be fully armed with the data for renewal conversations. Building a detailed and dynamic dashboard here was critical as it had to support multiple pricing and consumption models as well as surface critical information at the correct time. This dashboard leveraged contract and opportunity data from Salesforce, usage data from the platform and invoice data from Xero to construct a clear image of the customers current state.
+      </p>
+      <br />
+      <p>
+        On top of a deep dive of information on each client, Customer Success teams also require an overview of the customers in their portfolio. At a glance they need to see which of their clients require the most attention, whether they are at risk of churning or need a renewal. This dashboard provided clear oversight of the entire customer base and provided links to the Salesforce record and the in depth customer review dashboard to make this a one stop shop for users to have as a launching point to solve the problems of the day.
+      </p>
+      <br />
+      <p>
+        Need better customer reporting? Get in touch below to see how I can help.
+      </p>
+    `,
     tags: ['SQL', 'Salesforce', 'MetaBase'],
-    image: '/images/project-3.svg'
+    image: '/images/cs-dashboard.webp'
   },
   {
     id: '3',
     title: 'Pardot -> Hubspot',
     description: 'Optimising the marketing engine across multiple platforms',
+    longDescription: `
+      <p>Led the migration and synchronization strategy between Pardot and Hubspot to unify marketing operations.</p>
+      <br />
+      <p>This project involved complex data mapping, automation workflow translation, and ensuring data integrity across both platforms during the transition period.</p>
+    `,
     tags: ['Pardot', 'Hubspot', 'SQL'],
     image: '/images/project-2.svg'
   },
@@ -28,6 +107,12 @@ const projects: Project[] = [
     id: '4',
     title: 'VisaTracker Pro',
     description: 'Full-stack web application to track the number of days left before a visa expires.',
+    longDescription: `
+      <p>VisaTracker Pro helps international residents manage their visa status with confidence.</p>
+      <br />
+      <p><strong>Tech Stack:</strong> React, Supabase, and Custom Auth.</p>
+      <p>Features include automated email reminders, document storage, and a timeline view of visa milestones.</p>
+    `,
     tags: ['React', 'AntiGravity', 'SupaBase'],
     image: '/images/project-2.svg'
   },
@@ -35,6 +120,11 @@ const projects: Project[] = [
     id: '5',
     title: 'Diplomacy and RevOps',
     description: 'The link between diplomacy and Revenue Operations.',
+    longDescription: `
+      <p>An academic research project exploring the parallels between international diplomacy and modern Revenue Operations (RevOps).</p>
+      <br />
+      <p>This study analyzes negotiation tactics, stakeholder management, and conflict resolution strategies applicable to both fields.</p>
+    `,
     tags: ['Research', 'International Relations', 'Academic'],
     image: '/images/project-4.svg'
   }
@@ -43,17 +133,12 @@ const projects: Project[] = [
 const Projects: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   // Scroll to a specific index (for Title Navigation)
   const scrollToIndex = (index: number) => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
-
-    // Calculate position: (cardWidth + gap) * index
-    // We need to account for the padding-left to center the item
-    // Actually, because we use snap-center and padded container, simpler math works better?
-    // Let's use standard scrollLeft calculation.
-
     const cards = container.getElementsByClassName('project-card');
     if (cards[index]) {
       cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -63,12 +148,9 @@ const Projects: React.FC = () => {
 
   const scroll = (direction: 'left' | 'right') => {
     if (!scrollRef.current) return;
-
-    // Determine next index
     const newIndex = direction === 'left'
       ? Math.max(0, activeIndex - 1)
       : Math.min(projects.length - 1, activeIndex + 1);
-
     scrollToIndex(newIndex);
   };
 
@@ -78,7 +160,6 @@ const Projects: React.FC = () => {
     if (!container) return;
 
     const handleScroll = () => {
-      // Find which card is closest to the center
       const containerCenter = container.getBoundingClientRect().left + container.clientWidth / 2;
       const cards = Array.from(container.getElementsByClassName('project-card'));
 
@@ -102,11 +183,12 @@ const Projects: React.FC = () => {
       }
     };
 
-    // Debounce/Throttle could be good, but for 4 items rAF/normal listener is fine
     container.addEventListener('scroll', handleScroll, { passive: true });
     return () => container.removeEventListener('scroll', handleScroll);
   }, [activeIndex]);
 
+
+  const selectedProject = projects.find(p => p.id === selectedId);
 
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
@@ -131,12 +213,10 @@ const Projects: React.FC = () => {
         <div className="relative group/carousel">
 
           {/* Gradient Overlays */}
-          {/* Left Gradient - Fades the left peeking card */}
           <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          {/* Right Gradient - Fades the right peeking card */}
           <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          {/* Navigation Arrows (Always Visible) */}
+          {/* Navigation Arrows */}
           <button
             onClick={() => scroll('left')}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm transition-all border border-white/10"
@@ -155,10 +235,6 @@ const Projects: React.FC = () => {
 
 
           {/* Scrollable Track */}
-          {/* gap-6 = 24px. width on desktop approx 600px. 
-              We use px-[15%] or similar on container so the first item can be centered. 
-              snap-center aligns them.
-          */}
           <div
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 px-8 md:px-[25%] no-scrollbar"
@@ -167,7 +243,8 @@ const Projects: React.FC = () => {
             {projects.map((project, index) => (
               <div
                 key={project.id}
-                className="project-card shrink-0 w-full md:w-[600px] snap-center"
+                className="project-card shrink-0 w-full md:w-[600px] snap-center cursor-pointer"
+                onClick={() => setSelectedId(project.id)}
               >
                 <Card className={`h-full flex flex-col p-0 overflow-hidden border-white/5 transition-all duration-500 group ${index === activeIndex ? 'border-accent/40 shadow-[0_0_30px_rgba(59,130,246,0.1)]' : 'opacity-50 scale-95'}`}>
                   <div className="relative h-64 overflow-hidden">
@@ -194,6 +271,88 @@ const Projects: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Project Detail Modal */}
+      <AnimatePresence>
+        {selectedId && selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedId(null)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              layoutId={selectedId}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-5xl bg-[#0F0F10] border border-white/10 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedId(null)}
+                className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-white/10 rounded-full text-white/70 hover:text-white transition-colors"
+                aria-label="Close modal"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="relative w-full aspect-[2.35/1] shrink-0">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F10] to-transparent opacity-80" />
+              </div>
+
+              {/* Content Body */}
+              <div className="p-8 overflow-y-auto custom-scrollbar">
+                <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
+                <p className="text-lg text-slate-400 mb-6">{selectedProject.description}</p>
+
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {selectedProject.tags.map(tag => (
+                    <Badge key={tag}>{tag}</Badge>
+                  ))}
+                </div>
+
+                {/* Long Description (Rich Text) */}
+                <div className="prose prose-invert prose-lg max-w-none">
+                  {/* Divider */}
+                  <div className="h-px bg-white/10 my-8" />
+
+                  <div
+                    className="text-slate-300 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: selectedProject.longDescription || '' }}
+                  />
+                </div>
+
+                {/* CTA Button */}
+                <div className="mt-8 flex justify-center">
+                  <Button
+                    onClick={() => {
+                      setSelectedId(null);
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    Get in touch
+                  </Button>
+                </div>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
             Explore my work
           </Button>
           <Button variant="ghost" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-            Get in touch
+            Let's chat
           </Button>
         </motion.div>
       </div>
