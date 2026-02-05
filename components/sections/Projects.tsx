@@ -113,18 +113,18 @@ const projects: Project[] = [
   },
   {
     id: '4',
-    title: 'VisaTracker Pro',
-    description: 'Full-stack web application to track the number of days left before a visa expires.',
+    title: 'JobTracker Pro',
+    description: 'Full-stack web application to track my job applications in a CRM style interface.',
     longDescription: `
       <p>This is a personal project I have been working on and is my first attempt at solo developing a full stack web application leveraging AI.</p>
       <br />
-      <p>This tool was born out of a simple desire to be able to track the amount of days I had left while travelling through Europe. Within the Schengen area on a New Zealand Passport you are allowed 90 days in the continent within a 180 day window. Rather than pull out a spreadsheet I decided to try this so-called ‘vibe coding’ out for myself. </p>
+      <p>As I have been operating in the job market I saw an opportunity to not just streamline how I track my application, but also comstruct a detailed database architecture that I could use to gain massive insights into my job hunt.</p>
       <br />
-      <p>Using Google's AI Studio I was able to quickly generate a working prototype and confirm in minutes how many trips to Europe I could plan over the summer. I then downloaded this code, opened it up in Google’s AntiGravity IDE and started experimenting further. I was able to generate a sleek front-end to the app and through integrations with Supabase set up a solid back-end architecture that can scale to handle multiple users with different requirements.</p>
+      <p>Leveraging Google's AntiGravity IDE and Supabase I have been able to construct a full stack web application that is both reliable and scalable.</p>
       <br />
       <p>While by no means a software engineer, I have worked closely and reported to software engineers in my career, so I have been able to leverage those skills effectively to avoid many of the pitfalls that impact non technical developers. My deep understanding of information and data security thanks to my experience getting ISO27001 certified as well as understanding the importance of solid back end architecture through my Salesforce platform app building experience I am creating a reliable piece of software on my own.</p>
       <br />
-      <p>The application is still in development and I will look to publish soon to help me and friends accurately track their visa requirements.</p>
+      <p>The core of the application is completed, but I am constantly thinking of new features to include as I progress through the stages of my job hunt.</p>
       <br />
       <p>If you need custom automations that leverage AI, get in touch below.</p>
     `,
